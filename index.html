@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BLIND/BOX</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Space+Mono&family=Yarndings+12&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e8e8e6;--ink:#141414;--ph:#cfcfcc;--acc:#2f4a35;--accl:#e8e8e6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a1a19;--ink:#e8e8e6;--ph:#2c2c2b;--acc:#5f8f6a;--accl:#101010}}
+:root[data-theme="dark"]{--bg:#1a1a19;--ink:#e8e8e6;--ph:#2c2c2b;--acc:#5f8f6a;--accl:#101010}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:14px/1.5 'Space Mono','Courier New',monospace}
+nav{position:fixed;top:0;left:0;right:0;z-index:9;display:flex;border-bottom:2px solid var(--ink);background:var(--bg);padding-top:env(safe-area-inset-top,0px)}
+nav a{flex:1;text-align:center;text-transform:uppercase;padding:14px;border-right:2px solid var(--ink);color:var(--ink);text-decoration:none}
+nav a:last-child{border:0}
+nav a:hover{background:var(--ink);color:var(--bg)}
+body:not(:has(.page:target)) nav a[href="#home"]{background:var(--acc);color:var(--accl)}
+body:has(#home:target) nav a[href="#home"],body:has(#collection:target) nav a[href="#collection"],body:has(#contact:target) nav a[href="#contact"]{background:var(--acc);color:var(--accl)}
+.page{display:none;padding-top:calc(49px + env(safe-area-inset-top,0px))}
+#home{display:block}
+body:has(#collection:target) #home,body:has(#contact:target) #home{display:none}
+#collection:target,#contact:target{display:block}
+h1,h2{font-family:'Space Grotesk',Arial,sans-serif;text-transform:uppercase;letter-spacing:-.04em;line-height:.9}
+h1{font-size:clamp(56px,10vw,150px)}h2{font-size:clamp(26px,3.5vw,48px)}
+.acc{color:var(--acc)}
+.split{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 49px)}
+.txt{padding:40px;display:flex;flex-direction:column;justify-content:flex-end;gap:20px;border-right:2px solid var(--ink)}
+#home .split{grid-template-columns:1fr 1fr}.box{position:relative;z-index:1;justify-self:center;align-self:center;max-width:80%;max-height:75vh;object-fit:contain}#home{position:relative;overflow:hidden}.bgt{position:absolute;inset:0;overflow:hidden;pointer-events:none;font-family:'Space Grotesk',Arial,sans-serif;font-weight:700;line-height:.85;letter-spacing:-.04em;color:color-mix(in srgb,var(--ink) 11%,transparent)}.bgt .g{color:color-mix(in srgb,var(--acc) 70%,transparent)}.bgt .i{font-style:italic}#home .split,#home .txt{position:relative;z-index:1}#home .txt{border:0}#home h1{text-shadow:6px 6px 0 var(--acc)}#home h1 .acc{text-shadow:6px 6px 0 var(--ink)}#home .btn{box-shadow:6px 6px 0 var(--ink);transition:transform .1s,box-shadow .1s}#home .btn:hover{background:var(--acc);color:var(--accl)}#home .btn:active{transform:translate(6px,6px);box-shadow:0 0 0 var(--ink)}
+.photo{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;font:400 clamp(56px,8vw,130px) 'Yarndings 12',sans-serif;color:var(--acc);margin:50px 100px;width:min(22vw,320px);aspect-ratio:.9}.photo::before{content:'';position:absolute;inset:0;z-index:-1;background:var(--ph);clip-path:var(--shape)}.photo img{position:absolute;left:50%;top:50%;width:150%;height:150%;transform:translate(-50%,-50%);object-fit:contain;pointer-events:none}
+.photo[data-n="1"]{--shape:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.photo[data-n="2"]{--shape:polygon(50% 0,78% 50%,50% 100%,22% 50%)}
+.photo[data-n="3"]{--shape:polygon(50% 20%,100% 50%,50% 80%,0 50%)}
+.photo[data-n="4"]{--shape:polygon(28% 0,100% 0,72% 100%,0 100%)}
+.photo[data-n="5"]{--shape:polygon(50% 0,100% 72%,50% 100%,0 72%)}
+.photo[data-n="6"]{--shape:polygon(18% 8%,100% 28%,82% 92%,0 72%)}
+.btn{align-self:flex-start;padding:12px 22px;background:var(--acc);color:var(--accl);border:0;font:inherit;text-transform:uppercase;text-decoration:none}
+.btn:hover{background:var(--ink);color:var(--bg)}
+.item{display:flex;align-items:center;padding:60px 20px;min-height:500px;border-bottom:2px solid var(--ink)}
+.item .t{display:flex;flex-direction:column;gap:12px;max-width:280px;position:relative;z-index:1}
+.item:nth-of-type(odd){flex-direction:row-reverse}
+.item:nth-of-type(1) .t,.item:nth-of-type(4) .t{align-self:flex-end}
+.item:nth-of-type(2) .t,.item:nth-of-type(5) .t{align-self:flex-start}
+.head{padding:60px 40px 40px;border-bottom:2px solid var(--ink)}
+.big{display:block;font:700 clamp(22px,4vw,56px) 'Space Grotesk',sans-serif;letter-spacing:-.03em;border-bottom:2px solid var(--ink);padding:18px 0}
+
+.ct{grid-template-columns:auto 1fr}.ct .txt{padding:20px 28px;justify-content:center;align-items:center}.ct h1{writing-mode:vertical-rl;transform:rotate(180deg);font-size:min(17vh,18vw);line-height:.85}
+.ct .links{padding:40px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;z-index:1}#contact{position:relative;overflow:hidden}.peek{--w:min(44vw,640px);position:absolute;top:42%;width:var(--w);right:calc(var(--w)*-.2);transform:translateY(-50%) rotate(-90deg);pointer-events:none}
+@media(max-width:800px){.split,#home .split{grid-template-columns:1fr}.box{max-height:50vh;margin:20px 0 40px}.txt{border:0;border-bottom:2px solid var(--ink);padding:24px}
+.item,.item:nth-of-type(n){flex-direction:column!important;align-items:flex-start;padding:32px 24px;gap:20px;min-height:0}.item .t{align-self:flex-start!important;align-items:flex-start!important;text-align:left!important}.photo[data-n]{width:56%;margin:40px auto}
+.head,.ct .links{padding:32px 24px}.peek{--w:64vw;top:35%}.ct{grid-template-columns:auto 1fr}.ct .txt{border-bottom:0;border-right:2px solid var(--ink);padding:16px 18px;min-height:calc(100vh - 49px)}}
+@media(max-width:800px){
+  html:not(:has(#collection:target)),
+  html:not(:has(#collection:target)) body{height:100dvh;overflow:hidden}
+  #home,#contact{height:100dvh}
+  #home .split{height:100%;min-height:0;grid-template-rows:auto minmax(0,1fr)}
+  #home .txt{padding:20px 24px;gap:14px}
+  #home h1{font-size:clamp(44px,14vw,80px)}
+  #home .box{max-height:100%;max-width:70%;min-height:0;margin:0;justify-self:center;align-self:center}
+  #contact .split.ct{height:100%;min-height:0}
+  .ct .txt{min-height:0;height:100%}
+  .ct h1{font-size:min(15dvh,18vw)}
+}
+</style></head><body>
+<nav><a href="#home">Home</a><a href="#collection">Collection</a><a href="#contact">Contact</a></nav>
+
+<main id="home" class="page on">
+<div class="bgt" id="bgt" aria-hidden="true">PEKO100gpeko34Peko60ipEKO20peko160giPeko14</div>
+<div class="split">
+<section class="txt"><h1>Blind<br><span class="acc">Box</span></h1><a class="btn" href="#collection">See the collection</a></section><img class="box" alt="Blind box" src="box.webp"></div></main>
+
+<main id="collection" class="page">
+<header class="head"><h1>Collection</h1></header>
+<section class="item"><div class="photo" data-n="1">S</div><div class="t"><h2>meow</h2><p>meow meow meow meows</p></div></section>
+<section class="item"><div class="photo" data-n="2">R</div><div class="t"><h2>meow</h2><p>meow meow meow meows</p></div></section>
+<section class="item"><div class="photo" data-n="3">K</div><div class="t"><h2>meow</h2><p>meow meow meow meows</p></div></section>
+<section class="item"><div class="photo" data-n="4">M</div><div class="t"><h2>meow</h2><p>meow meow meow meows</p></div></section>
+<section class="item"><div class="photo" data-n="5">W</div><div class="t"><h2>meow</h2><p>meow meow meow meows</p></div></section>
+<section class="item"><div class="photo" data-n="6">E</div><div class="t"><h2>meow</h2><p>meow meow meow meows</p></div></section>
+</main>
+
+<main id="contact" class="page"><img class="peek" alt="" src="contact.webp"><div class="split ct">
+<section class="txt"><h1>Contact</h1></section>
+<section class="links"><div class="big">pekopeko@contact.com</div><div class="big">@pekopeko</div></section>
+</div></main>
+
+<script>
+(function(){const b=document.getElementById('bgt');b.innerHTML=b.textContent.replace(/([^\d]+)(\d+)([gi]*)/g,(_,t,n,f)=>'<span style="font-size:'+n+'px"'+(f?' class="'+f.split('').join(' ')+'"':'')+'>'+t+'</span>')})();
+document.querySelectorAll('.photo[data-n]').forEach(p=>{const x=['jpg','png','webp','jpeg'];(function t(){if(!x.length)return;const i=new Image();i.alt='';i.onload=()=>{p.textContent='';p.appendChild(i)};i.onerror=t;i.src=p.dataset.n+'.'+x.shift()})()});
+</script></body></html>
