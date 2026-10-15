@@ -127,5 +127,5 @@ h1{font-size:clamp(56px,10vw,150px)}h2{font-size:clamp(26px,3.5vw,48px)}
 <script>
 document.querySelectorAll('#collection .head h1').forEach(h=>{const t=h.textContent;h.setAttribute('aria-label',t);h.innerHTML=[...t].map((c,i)=>'<span class="l" aria-hidden="true" style="--i:'+(t.length-1-i)+'">'+c+'</span>').join('')});
 (function(){const b=document.getElementById('bgt');b.innerHTML=b.textContent.replace(/([^\d]+)(\d+)([gi]*)/g,(_,t,n,f)=>'<span style="font-size:'+n+'px"'+(f?' class="'+f.split('').join(' ')+'"':'')+'>'+t+'</span>')})();
-document.querySelectorAll('.photo[data-n]').forEach(p=>{const x=['jpg','png','webp','jpeg'];(function t(){if(!x.length)return;const i=new Image();i.alt='';i.onload=()=>{p.textContent='';p.appendChild(i)};i.onerror=t;i.src=p.dataset.n+'.'+x.shift()})()});
+document.querySelectorAll('.photo[data-n]').forEach(p=>{const x=['webp'];(function t(){if(!x.length)return;const i=new Image();i.alt='';i.onload=()=>{p.textContent='';p.appendChild(i)};i.onerror=t;i.src=p.dataset.n+'.'+x.shift()})()});
 </script></body></html>
