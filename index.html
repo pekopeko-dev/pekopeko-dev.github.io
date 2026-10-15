@@ -44,6 +44,8 @@ h1{font-size:clamp(56px,10vw,150px)}h2{font-size:clamp(26px,3.5vw,48px)}
 
 .ct{grid-template-columns:auto 1fr}.ct .txt{padding:20px 28px;justify-content:center;align-items:center}.ct h1{writing-mode:vertical-rl;transform:rotate(180deg);font-size:min(17vh,18vw);line-height:.85}
 .ct .links{padding:40px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;z-index:1}#contact{position:relative;overflow:hidden}.peek{--w:min(44vw,640px);position:absolute;top:42%;width:var(--w);right:calc(var(--w)*-.2);transform:translateY(-50%) rotate(-90deg);pointer-events:none}
+.btnw{position:relative;align-self:flex-start}.btnw .btn{position:relative;z-index:1;display:inline-block}.pk{position:absolute;z-index:0;bottom:100%;left:calc(22px + 1.5ch);width:56px;pointer-events:none;opacity:0;transform:translate(-50%,100%);transition:transform .25s ease,opacity .15s}.pk img{display:block;width:100%;height:auto}.btnw:hover .pk,.btnw:focus-within .pk{opacity:1;transform:translate(-50%,20%)}
+@keyframes peekin{0%{transform:translateX(calc(var(--w)*.5)) translateY(-50%) rotate(-90deg)}65%{transform:translateX(calc(var(--w)*-.05)) translateY(-50%) rotate(-90deg)}100%{transform:translateX(0) translateY(-50%) rotate(-90deg)}}#contact:target .peek{animation:peekin .3s ease-out both}
 @media(max-width:800px){.split,#home .split{grid-template-columns:1fr}.box{max-height:50vh;margin:20px 0 40px}.txt{border:0;border-bottom:2px solid var(--ink);padding:24px}
 .item,.item:nth-of-type(n){flex-direction:column!important;align-items:flex-start;padding:32px 24px;gap:20px;min-height:0}.item .t{align-self:flex-start!important;align-items:flex-start!important;text-align:left!important}.photo[data-n]{width:56%;margin:40px auto}
 .head,.ct .links{padding:32px 24px}.peek{--w:64vw;top:35%}.ct{grid-template-columns:auto 1fr}.ct .txt{border-bottom:0;border-right:2px solid var(--ink);padding:16px 18px;min-height:calc(100vh - 49px)}}
@@ -59,6 +61,14 @@ h1{font-size:clamp(56px,10vw,150px)}h2{font-size:clamp(26px,3.5vw,48px)}
   .ct .txt{min-height:0;height:100%}
   .ct h1{font-size:min(15dvh,18vw)}
 }
+
+#collection .head{overflow:hidden}
+#collection .head h1 .l{display:inline-block}
+#collection:target .head h1 .l{animation:lin .45s cubic-bezier(.15,.85,.25,1) both;animation-delay:calc(var(--i)*.07s)}
+#collection:target .head h1{animation:hit .45s steps(1,end) 1.1s both}
+@keyframes lin{0%{transform:translateX(-110vw);opacity:1}100%{transform:translateX(0)}}
+@keyframes hit{0%{transform:translate(-10px,4px) rotate(-.7deg)}12%{transform:translate(8px,-6px) rotate(.5deg)}24%{transform:translate(-7px,-3px)}36%{transform:translate(5px,4px) rotate(-.3deg)}48%{transform:translate(-4px,2px)}60%{transform:translate(3px,-2px)}72%{transform:translate(-2px,1px)}84%{transform:translate(1px,-1px)}100%{transform:none}}
+@media(prefers-reduced-motion:reduce){#collection:target .head h1,#collection:target .head h1 .l{animation:none}}
 </style></head><body>
 <nav><a href="#home">Home</a><a href="#collection">Collection</a><a href="#contact">Contact</a></nav>
 
@@ -91,7 +101,7 @@ h1{font-size:clamp(56px,10vw,150px)}h2{font-size:clamp(26px,3.5vw,48px)}
 
 </div>
 <div class="split">
-<section class="txt"><h1>Blind<br><span class="acc">Box</span></h1><a class="btn" href="#collection">See the collection</a></section><img class="box" alt="Blind box" src="box.webp"></div></main>
+<section class="txt"><h1>Blind<br><span class="acc">Box</span></h1><div class="btnw"><span class="pk"><img alt="" src="contact.webp"></span><a class="btn" href="#collection">See the collection</a></div></section><img class="box" alt="Blind box" src="box.webp"></div></main>
 
 <main id="collection" class="page">
 <header class="head"><h1>Collection</h1></header>
@@ -109,6 +119,7 @@ h1{font-size:clamp(56px,10vw,150px)}h2{font-size:clamp(26px,3.5vw,48px)}
 </div></main>
 
 <script>
+document.querySelectorAll('#collection .head h1').forEach(h=>{const t=h.textContent;h.setAttribute('aria-label',t);h.innerHTML=[...t].map((c,i)=>'<span class="l" aria-hidden="true" style="--i:'+(t.length-1-i)+'">'+c+'</span>').join('')});
 (function(){const b=document.getElementById('bgt');b.innerHTML=b.textContent.replace(/([^\d]+)(\d+)([gi]*)/g,(_,t,n,f)=>'<span style="font-size:'+n+'px"'+(f?' class="'+f.split('').join(' ')+'"':'')+'>'+t+'</span>')})();
 document.querySelectorAll('.photo[data-n]').forEach(p=>{const x=['jpg','png','webp','jpeg'];(function t(){if(!x.length)return;const i=new Image();i.alt='';i.onload=()=>{p.textContent='';p.appendChild(i)};i.onerror=t;i.src=p.dataset.n+'.'+x.shift()})()});
 </script></body></html>
