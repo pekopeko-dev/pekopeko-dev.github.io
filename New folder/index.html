@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BLIND/BOX</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Space+Mono&family=Yarndings+12&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e8e8e6;--ink:#141414;--ph:#cfcfcc;--acc:#2f4a35;--accl:#e8e8e6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:14px/1.5 'Space Mono','Courier New',monospace}
+nav{position:fixed;top:0;left:0;right:0;z-index:9;display:flex;border-bottom:2px solid var(--ink);background:var(--bg);padding-top:env(safe-area-inset-top,0px)}
+nav a{flex:1;text-align:center;text-transform:uppercase;padding:14px;border-right:2px solid var(--ink);color:var(--ink);text-decoration:none}
+nav a:last-child{border:0}
+nav a:hover{background:var(--ink);color:var(--bg)}
+body:not(:has(.page:target)) nav a[href="#home"]{background:var(--acc);color:var(--accl)}
+body:has(#home:target) nav a[href="#home"],body:has(#collection:target) nav a[href="#collection"],body:has(#contact:target) nav a[href="#contact"]{background:var(--acc);color:var(--accl)}
+.page{display:none;padding-top:calc(49px + env(safe-area-inset-top,0px))}
+#home{display:block}
+body:has(#collection:target) #home,body:has(#contact:target) #home{display:none}
+#collection:target,#contact:target{display:block}
+h1,h2{font-family:'Space Grotesk',Arial,sans-serif;text-transform:uppercase;letter-spacing:-.04em;line-height:.9}
+h1{font-size:clamp(56px,10vw,150px)}h2{font-size:clamp(26px,3.5vw,48px)}
+.acc{color:var(--acc)}
+.split{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 49px)}
+.txt{padding:40px;display:flex;flex-direction:column;justify-content:flex-end;gap:20px;border-right:2px solid var(--ink)}
+#home .split{grid-template-columns:1fr 1fr}.box{position:relative;z-index:1;justify-self:center;align-self:center;max-width:80%;max-height:75vh;object-fit:contain}#home{position:relative;overflow:hidden}.bgt{position:absolute;inset:0;overflow:hidden;pointer-events:none;font-family:'Space Grotesk',Arial,sans-serif;font-weight:700;line-height:.85;letter-spacing:-.04em;color:color-mix(in srgb,var(--ink) 11%,transparent)}.bgt .g{color:color-mix(in srgb,var(--acc) 70%,transparent)}.bgt .i{font-style:italic}#home .split,#home .txt{position:relative;z-index:1}#home .txt{border:0}#home h1{text-shadow:6px 6px 0 var(--acc)}#home h1 .acc{text-shadow:6px 6px 0 var(--ink)}#home .btn{box-shadow:6px 6px 0 var(--ink);transition:transform .1s,box-shadow .1s}#home .btn:hover{background:var(--acc);color:var(--accl)}#home .btn:active{transform:translate(6px,6px);box-shadow:0 0 0 var(--ink)}
+.photo{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;font:400 clamp(56px,8vw,130px) 'Yarndings 12',sans-serif;color:var(--acc);margin:50px 100px;width:min(22vw,320px);aspect-ratio:.9}.photo::before{content:'';position:absolute;inset:0;z-index:-1;background:var(--ph);clip-path:var(--shape)}.photo img{position:absolute;left:50%;top:50%;width:150%;height:150%;transform:translate(-50%,-50%);object-fit:contain;pointer-events:none}
+.photo[data-n="1"]{--shape:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.photo[data-n="2"]{--shape:polygon(50% 0,78% 50%,50% 100%,22% 50%)}
+.photo[data-n="3"]{--shape:polygon(50% 20%,100% 50%,50% 80%,0 50%)}
+.photo[data-n="4"]{--shape:polygon(28% 0,100% 0,72% 100%,0 100%)}
+.photo[data-n="5"]{--shape:polygon(50% 0,100% 72%,50% 100%,0 72%)}
+.photo[data-n="6"]{--shape:polygon(18% 8%,100% 28%,82% 92%,0 72%)}
+.btn{align-self:flex-start;padding:12px 22px;background:var(--acc);color:var(--accl);border:0;font:inherit;text-transform:uppercase;text-decoration:none}
+.btn:hover{background:var(--ink);color:var(--bg)}
+.item{display:flex;align-items:center;padding:60px 20px;min-height:500px;border-bottom:2px solid var(--ink)}
+.item .t{display:flex;flex-direction:column;gap:12px;max-width:280px;position:relative;z-index:1}
+.item:nth-of-type(odd){flex-direction:row-reverse}
+.item:nth-of-type(1) .t,.item:nth-of-type(4) .t{align-self:flex-end}
+.item:nth-of-type(2) .t,.item:nth-of-type(5) .t{align-self:flex-start}
+.head{padding:60px 40px 40px;border-bottom:2px solid var(--ink)}
+.big{display:block;font:700 clamp(22px,4vw,56px) 'Space Grotesk',sans-serif;letter-spacing:-.03em;border-bottom:2px solid var(--ink);padding:18px 0}
+
+.ct{grid-template-columns:auto 1fr}.ct .txt{padding:20px 28px;justify-content:center;align-items:center}.ct h1{writing-mode:vertical-rl;transform:rotate(180deg);font-size:min(17vh,18vw);line-height:.85}
+.ct .links{padding:40px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;z-index:1}#contact{position:relative;overflow:hidden}.peek{--w:min(44vw,640px);position:absolute;top:42%;width:var(--w);right:calc(var(--w)*-.2);transform:translateY(-50%) rotate(-90deg);pointer-events:none}
+.btnw{position:relative;align-self:flex-start}.btnw .btn{position:relative;z-index:1;display:inline-block}.pk{position:absolute;z-index:0;bottom:100%;left:calc(22px + 1.5ch);width:56px;pointer-events:none;opacity:0;transform:translate(-50%,100%);transition:transform .25s ease,opacity .15s}.pk img{display:block;width:100%;height:auto}.btnw:hover .pk,.btnw:focus-within .pk{opacity:1;transform:translate(-50%,20%)}
+@keyframes peekin{0%{transform:translateX(calc(var(--w)*.5)) translateY(-50%) rotate(-90deg)}65%{transform:translateX(calc(var(--w)*-.05)) translateY(-50%) rotate(-90deg)}100%{transform:translateX(0) translateY(-50%) rotate(-90deg)}}#contact:target .peek{animation:peekin .3s ease-out both}
+@media(max-width:800px){.split,#home .split{grid-template-columns:1fr}.box{max-height:50vh;margin:20px 0 40px}.txt{border:0;border-bottom:2px solid var(--ink);padding:24px}
+.item,.item:nth-of-type(n){flex-direction:column!important;align-items:flex-start;padding:32px 24px;gap:20px;min-height:0}.item .t{align-self:flex-start!important;align-items:flex-start!important;text-align:left!important}.photo[data-n]{width:56%;margin:40px auto}
+.head,.ct .links{padding:32px 24px}.peek{--w:64vw;top:35%}.ct{grid-template-columns:auto 1fr}.ct .txt{border-bottom:0;border-right:2px solid var(--ink);padding:16px 18px;min-height:calc(100vh - 49px)}}
+@media(max-width:800px){
+  html:not(:has(#collection:target)),
+  html:not(:has(#collection:target)) body{height:100dvh;overflow:hidden}
+  #home,#contact{height:100dvh}
+  #home .split{height:100%;min-height:0;grid-template-rows:auto minmax(0,1fr)}
+  #home .txt{padding:20px 24px;gap:14px}
+  #home h1{font-size:clamp(44px,14vw,80px)}
+  #home .box{max-height:100%;max-width:70%;min-height:0;margin:0;justify-self:center;align-self:center}
+  #contact .split.ct{height:100%;min-height:0}
+  .ct .txt{min-height:0;height:100%}
+  .ct h1{font-size:min(15dvh,18vw)}
+}
+
+#collection .head{overflow:hidden}
+#collection .head h1 .l{display:inline-block}
+#collection:target .head h1 .l{animation:lin .45s cubic-bezier(.15,.85,.25,1) both;animation-delay:calc(var(--i)*.07s)}
+#collection:target .head h1{animation:hit .45s steps(1,end) 1.1s both}
+@keyframes lin{0%{transform:translateX(-110vw);opacity:1}100%{transform:translateX(0)}}
+@keyframes hit{0%{transform:translate(-10px,4px) rotate(-.7deg)}12%{transform:translate(8px,-6px) rotate(.5deg)}24%{transform:translate(-7px,-3px)}36%{transform:translate(5px,4px) rotate(-.3deg)}48%{transform:translate(-4px,2px)}60%{transform:translate(3px,-2px)}72%{transform:translate(-2px,1px)}84%{transform:translate(1px,-1px)}100%{transform:none}}
+@media(prefers-reduced-motion:reduce){#collection:target .head h1,#collection:target .head h1 .l{animation:none}}
+
+@keyframes boxin{from{transform:translateX(60vw);opacity:0}to{transform:none;opacity:1}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+#home .box{animation:boxin 1s cubic-bezier(.15,.85,.25,1) both}
+#home .bgt{animation:fadein .3s ease-out both}
+@media(prefers-reduced-motion:reduce){#home .box,#home .bgt{animation:none}}
+</style></head><body>
+<nav><a href="#home">Home</a><a href="#collection">Collection</a><a href="#contact">Contact</a></nav>
+
+<main id="home" class="page on">
+<div class="bgt" id="bgt" aria-hidden="true">PEKO8pEko73Peko91peKO14PEko6peko38Peko97pEKO82peko11PEko54Peko3peKO67pEko89PEKO92peko7Peko41PEKO18peko99Peko63pEKO5peko28Peko76PEKO84peko13Peko2pEKO57PEko95peko61Peko44
+  PEKO9Peko87peko90pEKO32Peko16peko4PEKO78Peko53pEko68PEKO21peko36Peko100peko47PEKO83Peko12pEKO74peko26Peko59PEKO97peko1pEko86PEKO64peko33Peko71pEKO8PEKO93peko55Peko19pEKO42peko98PEKO30Peko66peko17PEKO75pEKO24Peko89
+  peko6PEKO51Peko37peko80PEKO94Peko10pEKO62peko43PEKO15Peko96pEKO70peko29Peko5PEKO88peko52Peko34PEKO99pEKO11Peko77peko3PEKO46peko85Peko60pEKO27PEKO72peko18Peko91PEKO39peko7Peko48pEKO95Peko22peko64PEKO13peko87Peko56
+  pEKO4peko31PEKO81Peko9Peko74peko58PEKO20Peko93pEKO66peko14Peko1PEKO49peko97Peko35PEKO86peko23Peko69pEKO52Peko8peko44PEKO90Peko28peko75Peko16PEKO3Peko99peko41PEKO61pEKO12peko83Peko57PEKO25peko6Peko92pEKO38peko70
+  Peko19PEKO84peko32Peko4PEKO55pEKO98Peko63peko11PEKO73peko46Peko87PEKO17peko94Peko30pEKO2Peko68peko59PEKO96pEKO21peko8Peko42PEKO79Peko14peko65Peko100PEKO37peko91Peko26pEKO54peko3PEKO88Peko72peko49PEKO5pEKO33Peko95
+  peko18PEKO67Peko40pEKO82peko7Peko61PEKO29pEKO99peko53Peko12PEKO76peko84Peko23pEKO9Peko47peko68PEKO31Peko90pEKO15peko56Peko1PEKO43peko97Peko74pEKO22PEKO85peko34Peko6pEKO60peko92PEKO11Peko39peko77PEKO4Peko58pEKO81
+  peko19Peko63PEKO28peko96Peko45PEKO70peko13Peko88pEKO37peko5Peko52PEKO99peko24Peko79pEKO16peko64PEKO8Peko93pEKO41peko30Peko86PEKO57peko2Peko71PEKO94peko48Peko10pEKO67peko83PEKO35Peko59peko7Peko98PEKO20peko44Peko91
+  pEKO3peko76Peko14PEKO62peko89Peko26PEKO51peko4Peko73pEKO95peko17Peko40PEKO84peko32Peko8PEKO69peko56Peko99pEKO21peko11PEKO87Peko46peko75Peko2PEKO64peko93Peko38pEKO5peko58PEKO97Peko19peko81Peko34PEKO72peko16Peko90
+  PEKO43peko7Peko55PEKO28peko99Peko12pEKO67peko41PEKO3Peko85peko64Peko23PEKO92pEKO14peko78Peko50PEKO6peko31Peko97PEKO45peko8Peko74pEKO20peko59PEKO88Peko36peko11Peko83PEKO2peko94Peko67pEKO29peko52PEKO18Peko99peko4
+  Peko76PEKO61peko33Peko9PEKO84peko71Peko25PEKO96peko42Peko63pEKO7peko88PEKO14Peko57peko3PEKO79Peko40peko92Peko16PEKO66peko35Peko98pEKO21peko5PEKO74Peko89peko12Peko44PEKO93peko27Peko61pEKO8PEKO55peko97Peko32PEKO4
+  peko70Peko15PEKO86peko48Peko99PEKO23peko6Peko53pEKO81peko37Peko10PEKO94peko68Peko29PEKO7Peko75peko41PEKO18pEKO62peko96Peko34PEKO50peko3Peko88pEKO11peko77PEKO25Peko60peko98Peko14PEKO44peko31Peko92PEKO5peko83Peko19
+  PEKO73peko46Peko2PEKO87peko64Peko39PEKO99peko8Peko56PEKO22peko91Peko13PEKO69peko4Peko85PEKO30peko72Peko17PEKO98peko43Peko65PEKO11peko94Peko28PEKO52peko6Peko79PEKO36peko99Peko41PEKO3peko58Peko87PEKO20peko75Peko12
+  PEKO90peko34Peko67PEKO8peko49Peko96PEKO15peko63Peko2PEKO81peko27Peko54PEKO93peko10Peko88PEKO46peko71Peko5PEKO32peko97Peko18PEKO60peko24Peko83PEKO7peko42Peko99PEKO35peko68Peko11PEKO76peko3Peko90PEKO58peko16Peko49
+  PEKO82peko28Peko95PEKO14peko61Peko7PEKO73peko39Peko86PEKO22peko55Peko100PEKO4peko92Peko31PEKO67peko13Peko79PEKO45peko98Peko6PEKO52peko24Peko91PEKO37peko64Peko18PEKO85peko2Peko56PEKO70peko33Peko99PEKO12peko47Peko8
+  PEKO62peko89Peko21PEKO94peko36Peko73PEKO5peko57Peko16PEKO82peko40Peko97PEKO11peko68Peko3PEKO90peko29Peko54PEKO76peko14Peko88PEKO42peko61Peko7PEKO95peko35Peko80PEKO18peko99Peko22PEKO64peko4Peko71PEKO31peko53Peko9
+  PEKO87peko26Peko62PEKO15peko94Peko48PEKO3peko79Peko100PEKO44peko11Peko86PEKO59peko27Peko68PEKO8peko92Peko34PEKO75peko16Peko51PEKO97peko6Peko83PEKO20peko47Peko99PEKO38peko12Peko72PEKO4peko89Peko25PEKO63peko31Peko96
+  PEKO10peko57Peko44PEKO81peko2Peko70PEKO36peko98Peko15PEKO52peko7Peko93PEKO28peko64Peko19PEKO86peko41Peko5PEKO77peko30Peko99PEKO14peko60Peko82PEKO3peko48Peko91PEKO25peko73Peko11PEKO67peko4Peko88PEKO39peko96Peko22
+  PEKO55peko18Peko74PEKO9peko63Peko100PEKO31peko47Peko86PEKO12peko90Peko5PEKO58peko24Peko79PEKO16peko98Peko43PEKO7peko67Peko34PEKO95peko11Peko52PEKO28peko84Peko3PEKO71peko46Peko92PEKO19peko60Peko8PEKO99peko37Peko55
+  PEKO14peko83Peko21PEKO64peko5Peko76PEKO33peko97Peko42PEKO10peko88Peko26PEKO59peko17Peko93PEKO4peko70Peko35PEKO81peko12Peko98PEKO47peko3Peko65PEKO22peko54Peko90PEKO31peko75Peko16PEKO87peko9Peko63PEKO40peko99Peko28
+  PEKO52peko14Peko83PEKO6peko71Peko37PEKO94peko20Peko58PEKO11peko89Peko43PEKO27peko96Peko4PEKO68peko33Peko91PEKO15peko62Peko80PEKO7peko49Peko100PEKO24peko57Peko86PEKO18peko73Peko5PEKO94peko41Peko29PEKO66peko12Peko87
+  PEKO3peko98Peko55PEKO21peko70Peko8PEKO43peko91Peko36PEKO64peko15Peko79PEKO2peko52Peko97PEKO30peko84Peko11PEKO68peko45Peko6PEKO99peko22Peko74PEKO17peko63Peko39PEKO88peko4Peko57PEKO12peko95Peko30PEKO71peko8Peko44
+  PEKO98peko36Peko60PEKO19peko83Peko2PEKO56peko27Peko91PEKO13peko72Peko48PEKO5peko89Peko31PEKO64peko16Peko99PEKO40peko7Peko53PEKO86peko24Peko78PEKO11peko67Peko34PEKO92peko3Peko59PEKO18peko97Peko46PEKO71peko9Peko85
+  PEKO22peko63Peko14PEKO100peko38Peko74PEKO5peko51Peko90PEKO27peko68Peko12PEKO83peko44Peko96PEKO31peko7Peko58PEKO19peko99Peko35PEKO62peko16Peko81PEKO4peko73Peko28PEKO95peko42Peko11PEKO67peko87Peko6PEKO54peko23Peko92
+  PEKO18peko60Peko37PEKO9peko78Peko49PEKO86peko15Peko70PEKO2peko94Peko33PEKO57peko8Peko61PEKO24peko99Peko46PEKO13peko82Peko5PEKO73peko34Peko90PEKO17peko65Peko28PEKO98peko11Peko53PEKO39peko84Peko7PEKO62peko20Peko96
+  PEKO45peko3Peko79PEKO14peko58Peko31PEKO89peko6Peko67PEKO42peko97Peko18PEKO55peko9Peko83PEKO26peko72Peko14PEKO61peko99Peko35PEKO8peko47Peko91PEKO12peko64Peko3PEKO77peko28Peko56PEKO95peko16Peko82PEKO40peko7Peko69
+
+</div>
+<div class="split">
+<section class="txt"><h1>Blind<br><span class="acc">Box</span></h1><div class="btnw"><span class="pk"><img alt="" src="contact.webp"></span><a class="btn" href="#collection">See the collection</a></div></section><img class="box" alt="Blind box" src="box.webp"></div></main>
+
+<main id="collection" class="page">
+<header class="head"><h1>Collection</h1></header>
+<section class="item"><div class="photo" data-n="1">S</div><div class="t"><h2>VANAPAGAN</h2><p>A giant farmer who is more stupid than malevolent..  also god of the underworld</p></div></section>
+<section class="item"><div class="photo" data-n="2">R</div><div class="t"><h2>KRATT</h2><p>Does everything the master orders</p></div></section>
+<section class="item"><div class="photo" data-n="3">K</div><div class="t"><h2>PÕHJAKONN</h2><p>Konn kes on põhjast??</p></div></section>
+<section class="item"><div class="photo" data-n="4">M</div><div class="t"><h2>?</h2><p>Coming Soon</p></div></section>
+<section class="item"><div class="photo" data-n="5">W</div><div class="t"><h2>?</h2><p>Coming Soon</p></div></section>
+<section class="item"><div class="photo" data-n="6">E</div><div class="t"><h2>meow</h2><p>meow meow meow</p></div></section>
+</main>
+
+<main id="contact" class="page"><img class="peek" alt="" src="contact.webp"><div class="split ct">
+<section class="txt"><h1>Contact</h1></section>
+<section class="links"><div class="big">pekopeko@contact.com</div><div class="big">@pekopeko</div></section>
+</div></main>
+
+<script>
+document.querySelectorAll('#collection .head h1').forEach(h=>{const t=h.textContent;h.setAttribute('aria-label',t);h.innerHTML=[...t].map((c,i)=>'<span class="l" aria-hidden="true" style="--i:'+(t.length-1-i)+'">'+c+'</span>').join('')});
+(function(){const b=document.getElementById('bgt');b.innerHTML=b.textContent.replace(/([^\d]+)(\d+)([gi]*)/g,(_,t,n,f)=>'<span style="font-size:'+n+'px"'+(f?' class="'+f.split('').join(' ')+'"':'')+'>'+t+'</span>')})();
+document.querySelectorAll('.photo[data-n]').forEach(p=>{const x=['webp'];(function t(){if(!x.length)return;const i=new Image();i.alt='';i.onload=()=>{p.textContent='';p.appendChild(i)};i.onerror=t;i.src=p.dataset.n+'.'+x.shift()})()});
+</script></body></html>
