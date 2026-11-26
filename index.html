@@ -75,13 +75,14 @@ h1{font-size:clamp(56px,10vw,150px)}h2{font-size:clamp(26px,3.5vw,48px)}
 #home .box{animation:boxin 1s cubic-bezier(.15,.85,.25,1) both}
 #home .bgt{animation:fadein .3s ease-out both}
 @media(prefers-reduced-motion:reduce){#home .box,#home .bgt{animation:none}}
-.hd{position:fixed;bottom:-6%;z-index:5;width:min(46vw,440px);height:auto;pointer-events:none;display:none;opacity:0;transform:translate(var(--x),35%) rotate(var(--r)) scale(.6);transition:transform .22s ease-in,opacity .2s ease-in}
-body:has(#collection:target) .hd{display:block}
-.hd.l{left:-8%;--x:-70%;--r:-22deg}
-.hd.r{right:-8%;--x:70%;--r:22deg}
-.hd.on{opacity:1;transform:none;transition:transform .55s cubic-bezier(.34,1.56,.64,1) .22s,opacity .15s .22s}
-@media(max-width:800px){.hd{width:42vw}}
-@media(prefers-reduced-motion:reduce){.hd,.hd.on{transition:none}}
+.item{position:relative;overflow:hidden}
+.hd{position:absolute;bottom:-4%;z-index:0;width:min(40vw,380px);height:auto;pointer-events:none;opacity:0;--f:1;transform:translate(var(--x),60%) rotate(var(--r)) scale(.6) scaleX(var(--f));transition:transform .22s ease-in,opacity .2s ease-in}
+.hd.l{left:0;--x:-50%;--r:-22deg}
+.hd.r{right:0;--x:50%;--r:22deg}
+.hd.fl{--f:-1}
+.item.on .hd{opacity:1;transform:scaleX(var(--f));transition:transform .55s cubic-bezier(.34,1.56,.64,1) .22s,opacity .15s .22s}
+@media(max-width:800px){.hd{width:46vw}}
+@media(prefers-reduced-motion:reduce){.hd,.item.on .hd{transition:none}}
 </style></head><body>
 <nav><a href="#home">Home</a><a href="#collection">Collection</a><a href="#contact">Contact</a></nav>
 <div id="lb"><img alt=""></div>
@@ -137,5 +138,5 @@ document.querySelectorAll('#collection .head h1').forEach(h=>{const t=h.textCont
 (function(){const b=document.getElementById('bgt');b.innerHTML=b.textContent.replace(/([^\d]+)(\d+)([gi]*)/g,(_,t,n,f)=>'<span style="font-size:'+n+'px"'+(f?' class="'+f.split('').join(' ')+'"':'')+'>'+t+'</span>');const sp=[...b.querySelectorAll('span')];if(matchMedia('(prefers-reduced-motion:reduce)').matches||!sp.length)return;setInterval(()=>{if(document.hidden||!b.offsetParent)return;const n=1+(Math.random()<.5);for(let k=0;k<n;k++){const e=sp[Math.floor(Math.random()*sp.length)];if(e.classList.contains('lit'))continue;e.classList.add('lit');e.addEventListener('animationend',()=>e.classList.remove('lit'),{once:true})}},120)})();
 document.querySelectorAll('.photo[data-n]').forEach(p=>{const x=['webp'];(function t(){if(!x.length)return;const i=new Image();i.alt='';i.onload=()=>{p.textContent='';p.appendChild(i);const n=+p.dataset.n;if(n<=4){p.classList.add('zm');p.addEventListener('click',()=>{lb.querySelector('img').src=n+'zoom.webp';lb.classList.add('on')})}};i.onerror=t;i.src=p.dataset.n+'.'+x.shift()})()});
 const lb=document.getElementById('lb');lb.addEventListener('click',()=>lb.classList.remove('on'));document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')});
-(function(){const items=[...document.querySelectorAll('#collection .item')];const heads=items.map((_,i)=>{if(i>3)return null;const h=new Image();h.alt='';h.className='hd '+(i%2===0?'l':'r');h.src=(i+1)+'head.webp';document.body.appendChild(h);return h});let cur=-1,tick=false;function update(){tick=false;let idx=-1;if(location.hash==='#collection'){const y=innerHeight/2;items.forEach((el,i)=>{const r=el.getBoundingClientRect();if(r.top<=y&&r.bottom>y)idx=i})}if(idx===cur)return;cur=idx;heads.forEach((h,i)=>{if(h)h.classList.toggle('on',i===idx)})}function req(){if(tick)return;tick=true;requestAnimationFrame(update)}addEventListener('scroll',req,{passive:true});addEventListener('resize',req);addEventListener('hashchange',()=>{cur=-2;req()});req()})();
+(function(){const items=[...document.querySelectorAll('#collection .item')];items.forEach((el,i)=>{if(i>3)return;const h=new Image();h.alt='';h.className='hd '+(i%2===0?'l':'r')+(i===0||i===2?' fl':'');h.src=(i+1)+'head.webp';el.appendChild(h)});let cur=-1,tick=false;function update(){tick=false;let idx=-1;if(location.hash==='#collection'){const y=innerHeight/2;items.forEach((el,i)=>{const r=el.getBoundingClientRect();if(r.top<=y&&r.bottom>y)idx=i})}if(idx===cur)return;cur=idx;items.forEach((el,i)=>el.classList.toggle('on',i===idx))}function req(){if(tick)return;tick=true;requestAnimationFrame(update)}addEventListener('scroll',req,{passive:true});addEventListener('resize',req);addEventListener('hashchange',()=>{cur=-2;req()});req()})();
 </script></body></html>
